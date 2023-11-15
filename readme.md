@@ -1,9 +1,0 @@
-In our current healthcare system, there exist numerous inefficiencies that adversely affect both patients and medical professionals. 
-
-Nexa emerges as the beacon of hope, addressing these pressing healthcare challenges
-
-1. QR Coded Health Card: In the era of Nexa, patients will embrace a paradigm shift as they carry a QR coded health card brimming with their comprehensive medical history, family medical lineage, meticulously cataloged medical reports, and other pivotal health-related details. Gone are the days of grappling with voluminous forms or battling memory lapses during life-threatening emergencies. **With a swift scan, this digital key unlocks a treasure trove of essential information**, offering immediate access to crucial insights that can be life-saving.
-
-2. AI Diagnostic Assistant: Nexa has an AI diagnostic assistant that transcends the boundaries of traditional AI solutions. **What sets Nexa apart is its unwavering commitment to safeguarding user privacy**. Prior to invoking the AI model, Nexa employs a data protection mechanism using Pangea APPI that conceals all personally identifiable data, ensuring that sensitive health information remains confidential and secure. This groundbreaking approach redefines the boundaries of AI-powered healthcare, setting a new standard for privacy-conscious medical solutions.
-
-3. Medication Reminder App: Nexa's multifaceted approach extends to the realm of medication management, where our dedicated app takes the reins in combating medication mismanagement. Through this user-friendly application, **patients can effortlessly configure personalized medication reminders, leaving no room for missed doses or scheduling errors.**
