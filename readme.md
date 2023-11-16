@@ -1,4 +1,3 @@
-# Nexa
 
 ## 💡 Inspiration
 In our current healthcare system, there exist numerous inefficiencies that adversely affect both patients and medical professionals. 
@@ -19,6 +18,9 @@ Nexa emerges as the beacon of hope, addressing these pressing healthcare challen
 
 3. Medication Reminder App: Nexa's multifaceted approach extends to the realm of medication management, where our dedicated app takes the reins in combating medication mismanagement. Through this user-friendly application, **patients can effortlessly configure personalized medication reminders, leaving no room for missed doses or scheduling errors.**
 
+**Potential Impact** 
+- Community Impact: Nexa has the potential to have a substantial impact on the Pangea community and beyond. By addressing critical healthcare challenges such as medication adherence, access to medical records, and efficient communication with healthcare providers, Nexa contributes to improved health outcomes and enhanced healthcare experiences for more than 10 million users.
+  
 ## ⭐Where Pangea API is used
 #### Compliance
 - Secure Audit Log: All important events are captured in the audit logs
@@ -38,31 +40,4 @@ Nexa emerges as the beacon of hope, addressing these pressing healthcare challen
 #### Detect
 -  File Scan: When the user uploads any medical report pdf, we detect whether it is malicious or not
 
-## 🏆 How Nexa satisfies the judgment criteria
- 1. **Technological Implementation**: 
-- Nexa seamlessly interacts with the pangea 10+ API to provide users with valuable healthcare solutions, showcasing well-structured and robust coding practices. 
-- It also uses Twilio to make phone calls and celery to create a cron that constantly monitors the time and alert when it is time to consume the medicine
-- It also has a speech to text convertor  and an openai assistant to help diagnose disease 
- 
- 2. **Design**
-- User-Centric Design: Nexa places a strong emphasis on user-centric design. Every feature and interface element has been designed with the user's needs and preferences in mind. The QR-coded health card, AI diagnostic assistant, and medication reminder app are all designed to streamline the user's healthcare journey.
-- Privacy Focus: The design also prioritizes user privacy. By concealing personally identifiable data before invoking the AI model, Nexa ensures that sensitive health information remains protected and compliant with privacy regulations.
-
- 3. **Potential Impact** 
-- Community Impact: Nexa has the potential to have a substantial impact on the Pangea community and beyond. By addressing critical healthcare challenges such as medication adherence, access to medical records, and efficient communication with healthcare providers, Nexa contributes to improved health outcomes and enhanced healthcare experiences for more than 10 million users.
-- Data Privacy: By placing a strong focus on user data privacy, Nexa not only improves healthcare but also sets a precedent for secure and ethical data handling in healthcare technology.
-
-## 🚧 Challenges we ran into
-During the design and development process of Nexa, I encountered a series of intricate challenges. I ran into a lot of bugs while implementing the code for the project, especially the backend section. With the clock ticking down, prioritizing various tasks and managing deadlines was a challenge. Also because of lack of time, I couldn't properly do the demo as well
- Also doing everything solo and completing the project on time was very difficult
-
-## 🎉 Accomplishments that we're proud of
-I embraced the task of single-handedly developing Nexa, handling both the intricate backend technical aspects and crafting the appealing frontend interface you interact with. I am very pride of it
-
-## 🌿 What's next for Nexa
-- Due to lack of time, I couldn't implement all features in a proper manner
-- Integration with blockchain
-- Create a space for users to connect, share experiences, and provide support to one another 
-- Integration with Wearable Devices
-- Integrate a tool that helps users compare medication prices and find cost-effective options or prescription assistance programs.
 
