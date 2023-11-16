@@ -30,6 +30,22 @@ load_dotenv(dotenv_path)
 config = PangeaConfig(domain=os.getenv("PANGEA_DOMAIN"))  
 audit = Audit(os.getenv("PANGEA_AUDIT_TOKEN"), config=config) 
 
+def user_exist(username,password):
+    user = User.objects.filter(username=username, password=password)
+    if user:
+        return True
+    else:
+        return False
+
+
+def valid_username(credential):
+    username = credential.cleaned_data.get("username")
+    user = User.objects.filter(username=username)
+    if user:
+        return False
+    else:
+        return True
+
 def get_public_ip():
     try:
         # Use a public IP address API service
@@ -42,6 +58,44 @@ def get_public_ip():
     except Exception as e:
         return str(e)
     
+def login_page(request):
+    ip_addr=get_public_ip()
+    sanction_msg=''
+
+    token = os.getenv("PANGEA_TOKEN")
+    domain = os.getenv("PANGEA_DOMAIN")
+    config = PangeaConfig(domain=domain)
+    embargo = Embargo(token, config=config, logger_name="embargo")
+    logger_set_pangea_config(logger_name=embargo.logger.name)
+
+    try:
+        embargo_response = embargo.ip_check(ip=ip_addr)
+        print(f"Response: {embargo_response.result}")
+        audit.log(f"A user with ip addresss {ip_addr} has tried to login")
+        sanctions_count= embargo_response.result.count
+        if sanctions_count>=1:
+                sanction_msg=embargo_response.result.summary
+    except pe.PangeaAPIException as err:
+        print(f"Embargo Request Error: {err.response.summary}")
+        for er in err.errors:
+            print(f"\t{er.detail} \n")
+    
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            if user_exist(request.POST.get('username', ''),request.POST.get('password', '')):
+                    audit.log(f"Valid user login in")
+                    messages.add_message(request, messages.INFO, 'Logged in!')
+                    return redirect('/')
+    else:
+         form = UserForm()
+
+    sanction_msg=''
+    context = {
+        'form': form,
+        'sanction_msg':sanction_msg
+    }
+    return render(request, 'user/login.html', context)
 
 
 def check_password_breach(intel,password):
@@ -115,50 +169,36 @@ def domain_intel(email):
         for err in e.errors:
             print(f"\t{err.detail} \n")
 
-def user_exist(credential):
-    username = credential.cleaned_data.get("username")
-    password = credential.cleaned_data.get("password")
-    user = User.objects.filter(username=username, password=password)
-    if user:
-        return True
-    else:
-        return False
-
-
-def valid_username(credential):
-    username = credential.cleaned_data.get("username")
-    user = User.objects.filter(username=username)
-    if user:
-        return False
-    else:
-        return True
-
-
-def login_page(request):
-    form = UserForm()
-    if request.method == 'POST':
-        form = UserForm(request.POST)
-        if form.is_valid():
-            if user_exist(form):
-                messages.add_message(request, messages.INFO, 'Logged in!')
-                return redirect('/')
-    context = {
-        'form': form
-    }
-    return render(request, 'user/login.html', context)
-
-
 def register_page(request):
-    form = UserForm()
+    breach_message=''
+    phone_breach_message=''
+    password_breach_message=''
+    email_breach_message=''
     if request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid() and valid_username(form):
-            form.save()
-            return redirect('/user/login')
+            token = os.getenv("PANGEA_TOKEN")
+            domain = os.getenv("PANGEA_DOMAIN")
+            config = PangeaConfig(domain=domain)
+            intel = UserIntel(token, config=config, logger_name="intel")
+            logger_set_pangea_config(logger_name=intel.logger.name)
+            domain_intel(request.POST.get('email'))
+            # password_breach_message=check_password_breach(intel,form.cleaned_data.get("password"))
+            # email_breach_message=check_email_breach(intel,form.cleaned_data.get("password"))
+            # phone_breach_message=check_phone_breach(intel,form.cleaned_data.get("phone"))
+            breach_message=password_breach_message+'\n'+email_breach_message+'\n'+phone_breach_message
+            if len(breach_message)==1:
+                form.save()
+                return redirect('/login')
+    else:
+        form = UserForm()
     context = {
-        'form': form
+        'form': form,
+        "breach_message":breach_message
+
     }
     return render(request, 'user/register.html', context)
+
 
 def landingpage(request):
     username=request.user

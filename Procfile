@@ -1,1 +1,0 @@
-web gunicorn nexa.wsgi:application --log-file -

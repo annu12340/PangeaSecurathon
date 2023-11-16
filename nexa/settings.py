@@ -1,7 +1,5 @@
 
 import os
-import django_heroku
-import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&0er(t#&rcq714(8huxq15l=wobe#muvrq%wnzu=qpb==$d^r)'
@@ -105,5 +103,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-django_heroku.settings(locals())
